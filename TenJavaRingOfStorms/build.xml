@@ -1,0 +1,50 @@
+<project name="REPLACE" default="package">
+	<property name="explorer" location="C:\Windows\explorer.exe"/>
+	<property name="distFolder" location="D:\Workspace\#GIT\tenjavaringofstorms\TenJavaRingOfStorms\dist"/>
+	<property environment="env"/>
+	<property name="env.BUILD_NUMBER" value="1.0"/>
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="1.6"/>
+	<property name="source" value="1.6"/>
+	
+	<target name="init" description="Initialize directories, etc.">
+		<mkdir dir="bin"/>
+		<mkdir dir="dist"/>
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="clean" depends="init" description="Clean up all the temp stuff and previous builds">
+		<delete>
+			<fileset dir="bin"/>
+		</delete>
+	</target>
+	
+	<echo message="${ant.project.name}: ${ant.file}"/>
+	
+	<target name="compile" depends="clean, init" description="Compile all the code">
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+			<src path="src"/>
+			<classpath>
+				<fileset dir="lib" includes="**/*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="package" depends="compile" description="Make the distributable jar file">
+		<copy todir="bin" overwrite="true">
+			<fileset dir="resources" includes="*"/>
+				<filterset>
+				<filter token="VERSION" value="${env.BUILD_NUMBER}"/>
+			</filterset>
+		</copy>
+		
+		<jar basedir="bin" jarfile="dist/${ant.project.name}.jar" defaultexcludes="true"/>
+		<exec executable='${explorer}' spawn="true">
+			<arg value="${distFolder}"/>
+		</exec>
+	</target>
+</project>

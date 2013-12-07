@@ -47,6 +47,10 @@ public class EntityPetsCommands implements CommandExecutor {
 			Player p = (Player) sender;
 			
 			if(args.length == 0) {
+				p.sendMessage(ChatColor.GRAY+"Shift R_Click Pet ----= Return pet ball to inventory.");
+				p.sendMessage(ChatColor.GRAY+"R_Click Pet ---------= Make pet sit(/stay).");
+				p.sendMessage(ChatColor.GRAY+"R_Click Pet w/ Saddle = Mount pet. (W,A,S,D for movement)");
+				p.sendMessage(ChatColor.GOLD+"/pet <entity>");
 				p.sendMessage(ChatColor.GREEN+"Available Pets: "+ChatColor.DARK_AQUA+alloString);
 			}else if(args.length == 1) {
 				EntityType et = null;

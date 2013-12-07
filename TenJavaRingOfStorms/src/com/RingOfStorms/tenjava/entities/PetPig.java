@@ -104,3 +104,4 @@ public class PetPig extends EntityPig implements PetEntity {
 		return targetSelector;
 	}
 }
+

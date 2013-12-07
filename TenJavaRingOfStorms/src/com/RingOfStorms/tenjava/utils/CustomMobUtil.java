@@ -49,7 +49,7 @@ public class CustomMobUtil {
 		}
 		
 		CraftEntity ce = entity.getThis().getBukkitEntity();
-		ce.setMetadata(entity.getOwnerName()+"_petEntity0", new FixedMetadataValue(entity.getPlugin(), null));
+		ce.setMetadata("petEntity0", new FixedMetadataValue(entity.getPlugin(), entity.getOwnerName()));
 	}
 	
 	public static void addPathGoal (PetEntity entity, int priority, PathfinderGoal goal) {

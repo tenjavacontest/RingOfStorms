@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityCombustByBlockEvent;
+import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -133,6 +134,13 @@ public class EntityPetListener implements Listener {
 	
 	@EventHandler
 	public void cancel (EntityCombustByBlockEvent e) {
+		if(e.getEntity().hasMetadata("petEntity0")) {
+			e.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void cancel (EntityCombustEvent e) {
 		if(e.getEntity().hasMetadata("petEntity0")) {
 			e.setCancelled(true);
 		}

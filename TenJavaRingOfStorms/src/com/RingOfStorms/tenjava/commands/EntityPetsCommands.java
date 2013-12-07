@@ -51,6 +51,7 @@ public class EntityPetsCommands implements CommandExecutor {
 				p.sendMessage(ChatColor.GRAY+"R_Click Pet ---------= Make pet sit(/stay).");
 				p.sendMessage(ChatColor.GRAY+"R_Click Pet w/ Saddle = Mount pet. (W,A,S,D for movement)");
 				p.sendMessage(ChatColor.GOLD+"/pet <entity>");
+				p.sendMessage(ChatColor.GOLD+"/pet <entity> <player> [amount]");
 				p.sendMessage(ChatColor.GREEN+"Available Pets: "+ChatColor.DARK_AQUA+alloString);
 			}else if(args.length == 1) {
 				EntityType et = null;
@@ -90,12 +91,20 @@ public class EntityPetsCommands implements CommandExecutor {
 					return true;
 				}
 				
+				int n = 1;
+				if(args.length > 2)
+					try {
+						n = Integer.parseInt(args[2]);
+					}catch(Exception fail) {
+						p.sendMessage(ChatColor.RED+"The number you entered was not a valid number. "+args[2]);
+					}
+				
 				if(p.hasPermission("entitypets."+et.toString().toLowerCase()+".give")|| p.hasPermission("entitypets.give.*")) {
 					Player t = Bukkit.getPlayer(args[1]);
 					if(t != null) {
 						p.sendMessage(ChatColor.GREEN+"Giving "+t.getName()+" a "+getPlugin().entityName(et)+" pet.");
 						t.sendMessage(ChatColor.GREEN+"You have been given a "+getPlugin().entityName(et)+" pet.");
-						t.getInventory().addItem(ItemStackUtil.setName(new ItemStack(Material.SNOW_BALL), p.getName()+"'s Pet "+getPlugin().entityName(et)));
+						t.getInventory().addItem(ItemStackUtil.setName(new ItemStack(Material.SNOW_BALL, n), p.getName()+"'s Pet "+getPlugin().entityName(et)));
 					}else{
 						p.sendMessage(ChatColor.RED+"Invalid player");
 					}

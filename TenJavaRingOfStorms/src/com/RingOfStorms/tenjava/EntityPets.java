@@ -26,11 +26,3 @@ public class EntityPets extends JavaPlugin {
 		return;
 	}
 }
-/*
-* Plan:
-* 
-* Pets>
-* All Entities
-* Level up pets ?
-* Pet skills ?
-*/

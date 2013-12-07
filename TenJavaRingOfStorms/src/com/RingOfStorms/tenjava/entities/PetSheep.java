@@ -1,7 +1,7 @@
 package com.RingOfStorms.tenjava.entities;
 
 import net.minecraft.server.v1_6_R3.EntityInsentient;
-import net.minecraft.server.v1_6_R3.EntityZombie;
+import net.minecraft.server.v1_6_R3.EntitySheep;
 import net.minecraft.server.v1_6_R3.PathfinderGoalSelector;
 import net.minecraft.server.v1_6_R3.World;
 
@@ -13,21 +13,21 @@ import com.RingOfStorms.tenjava.EntityPets;
 import com.RingOfStorms.tenjava.pathfinders.PetGoalFollowOwner;
 import com.RingOfStorms.tenjava.utils.CustomMobUtil;
 
-public class PetZombie extends EntityZombie implements PetEntity {
+public class PetSheep extends EntitySheep implements PetEntity {
 
 	private final EntityPets plugin;
 
-	public PetZombie(World arg0, EntityPets plugin) {
+	public PetSheep(World arg0, EntityPets plugin) {
 		this(arg0, plugin, null);
 	}
 	
-	public PetZombie(World arg0, EntityPets plugin, String owner) {
+	public PetSheep(World arg0, EntityPets plugin, String owner) {
 		super(arg0);
 		this.plugin = plugin;
 		if(owner != null)
 			setOwner(owner);
 		CustomMobUtil.defaultPet(this);
-	}
+	}	
 	
 	public EntityPets getPlugin () {
 		return plugin;

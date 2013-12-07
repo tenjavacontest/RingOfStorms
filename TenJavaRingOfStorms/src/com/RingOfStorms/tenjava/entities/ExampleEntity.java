@@ -15,12 +15,18 @@ import com.RingOfStorms.tenjava.utils.CustomMobUtil;
 public class ExampleEntity extends EntityInsentient implements PetEntity {
 
 	private final EntityPets plugin;
-	
+
 	public ExampleEntity(World arg0, EntityPets plugin) {
+		this(arg0, plugin, null);
+	}
+	
+	public ExampleEntity(World arg0, EntityPets plugin, String owner) {
 		super(arg0);
 		this.plugin = plugin;
+		if(owner != null)
+			setOwner(owner);
 		CustomMobUtil.defaultPet(this);
-	}		
+	}	
 	
 	public EntityPets getPlugin () {
 		return plugin;
@@ -62,6 +68,7 @@ public class ExampleEntity extends EntityInsentient implements PetEntity {
 	
 	public void setSitting (boolean isSitting) {
 		this.isSitting = isSitting;
+		setSneaking(isSitting());
 		updateFollowGoal();
 	}
 	
@@ -76,9 +83,11 @@ public class ExampleEntity extends EntityInsentient implements PetEntity {
 	
 	public void updateFollowGoal () {
 		Player p = Bukkit.getPlayerExact(ownerName);
-		if(p != null)
-			follow.setOwner(((CraftPlayer)p).getHandle());
-		follow.setSitting(isSitting());
+		if(follow != null) {
+			if(p != null)
+				follow.setOwner(((CraftPlayer)p).getHandle());
+			follow.setSitting(isSitting());
+		}
 	}
 	
 	public void updateAttribs () {

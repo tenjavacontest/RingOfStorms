@@ -26,7 +26,7 @@ public class PetZombie extends EntityZombie implements PetEntity {
 		if(owner != null)
 			setOwner(owner);
 		CustomMobUtil.defaultPet(this);
-	}		
+	}
 	
 	public EntityPets getPlugin () {
 		return plugin;
@@ -68,6 +68,7 @@ public class PetZombie extends EntityZombie implements PetEntity {
 	
 	public void setSitting (boolean isSitting) {
 		this.isSitting = isSitting;
+		setSneaking(isSitting());
 		updateFollowGoal();
 	}
 	

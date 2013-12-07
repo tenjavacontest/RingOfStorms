@@ -30,9 +30,7 @@ public class EntityPets extends JavaPlugin {
 * Plan:
 * 
 * Pets>
+* All Entities
 * Level up pets ?
 * Pet skills ?
-* sit/stay mode, follow mode, ride mode (when available, possible skill?) <
-* 
-* anything else:
 */

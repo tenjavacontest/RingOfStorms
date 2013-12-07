@@ -21,7 +21,7 @@ public class EntityPetsCommands implements CommandExecutor {
 			getPlugin().getCommand(command).setExecutor(this);
 	}
 	
-	public EntityPets getPlugin () {
+	public EntityPets getPlugin () { 
 		return plugin;
 	}
 	

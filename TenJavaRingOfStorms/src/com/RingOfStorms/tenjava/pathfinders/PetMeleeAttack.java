@@ -19,10 +19,11 @@ public class PetMeleeAttack extends PathfinderGoal {
 	double d;
 	boolean e;
 	PathEntity f;
+	@SuppressWarnings("rawtypes")
 	Class g;
 	private int h;
 	
-	public PetMeleeAttack (EntityInsentient entity, Class oclass, double d0, boolean flag) {
+	public PetMeleeAttack (EntityInsentient entity, @SuppressWarnings("rawtypes") Class oclass, double d0, boolean flag) {
 		this(entity, d0, flag);
 		this.g = oclass;
 	}
@@ -35,6 +36,7 @@ public class PetMeleeAttack extends PathfinderGoal {
 		this.a(3);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean a() {
 		EntityLiving el = this.b.getGoalTarget();

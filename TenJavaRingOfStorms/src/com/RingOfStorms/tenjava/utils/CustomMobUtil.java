@@ -34,10 +34,10 @@ public class CustomMobUtil {
 	public static void defaultPet (PetEntity entity) {
 		removeAllGoals(entity);
 		
-		entity.setFollow(new PetGoalFollowOwner(entity.getThis(), 1.2D, 10.0F, 2.0F, null));
+		entity.setFollow(new PetGoalFollowOwner(entity.getThis(), 1.5D, 10.0F, 2.0F, null));
 		addPathGoal(entity, 0, new PathfinderGoalFloat(entity.getThis()));
-		addPathGoal(entity, 1, entity.getFollow());
-		addPathGoal(entity, 2, new PetMeleeAttack(entity.getThis(), 1.3D, false));
+		addPathGoal(entity, 1, new PetMeleeAttack(entity.getThis(), 1.8D, false));
+		addPathGoal(entity, 2, entity.getFollow());
 		addPathGoal(entity, 3, new PathfinderGoalLookAtPlayer(entity.getThis(), EntityHuman.class, 10.0F));
 		addPathGoal(entity, 4, new PathfinderGoalRandomLookaround(entity.getThis()));
 		

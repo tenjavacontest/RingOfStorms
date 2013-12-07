@@ -8,16 +8,19 @@ Theme: EntityPets
 
 EntityPets
 ==========
-Description: Have awesome pets, more info soon xD
+Description: Have awesome pets that aren't just wolves! They follow, attack, sit, etc..
 <br/>
 Features: 
 <ul>
-<li> Have a pet
+<li> Pet balls that can be used to store your pets in item form, throw them to summon the pet. (Shift click pet to get their pet ball)
+<li> Right click a pet with a saddle to ride them!
+<li> Pets will attack with you and defend you
+<li> Pets will teleport to you if you are far away (if they are not sitting)
 </ul>
 <br/>
 Permissions: 
 <ul>
-<li> entitypets.<entity>
+<li> N/A
 </ul>
 <br/>
 Commands: 
@@ -25,6 +28,6 @@ Commands:
 <li> /pet
 </ul>
 <br/>
-Download: 
+Download: https://github.com/tenjavacontest/RingOfStorms/raw/master/TenJavaRingOfStorms/dist/EntityPets.jar
 <br/>
 Bugs: N/A

@@ -18,8 +18,10 @@ import net.minecraft.server.v1_6_R3.PathfinderGoalRandomLookaround;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_6_R3.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import com.RingOfStorms.tenjava.entities.PetEntity;
 import com.RingOfStorms.tenjava.pathfinders.PetGoalFollowOwner;
@@ -45,6 +47,9 @@ public class CustomMobUtil {
 			addTargetGoal(entity, 0, new PetOwnerHurtTarget((EntityCreature) entity.getThis(), elp));
 			addTargetGoal(entity, 1, new PetOwnerHurtByTarget((EntityCreature) entity.getThis(), elp));
 		}
+		
+		CraftEntity ce = entity.getThis().getBukkitEntity();
+		ce.setMetadata(entity.getOwnerName()+"_petEntity0", new FixedMetadataValue(entity.getPlugin(), null));
 	}
 	
 	public static void addPathGoal (PetEntity entity, int priority, PathfinderGoal goal) {

@@ -3,6 +3,7 @@ package com.RingOfStorms.tenjava;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.RingOfStorms.tenjava.commands.EntityPetsCommands;
+import com.RingOfStorms.tenjava.listeners.EntityPetListener;
 
 public class EntityPets extends JavaPlugin {
 	
@@ -20,6 +21,8 @@ public class EntityPets extends JavaPlugin {
 	public void onEnable () {
 		commands = new EntityPetsCommands(this, "pet");
 		
+		getServer().getPluginManager().registerEvents(new EntityPetListener(this), this);
+		
 		return;
 	}
 }
@@ -27,8 +30,6 @@ public class EntityPets extends JavaPlugin {
 * Plan:
 * 
 * Pets>
-* All entities can follow you around <
-* Help player attack enemies <
 * Level up pets ?
 * Pet skills ?
 * sit/stay mode, follow mode, ride mode (when available, possible skill?) <

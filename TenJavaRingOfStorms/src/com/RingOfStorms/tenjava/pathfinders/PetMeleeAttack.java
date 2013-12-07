@@ -45,6 +45,8 @@ public class PetMeleeAttack extends PathfinderGoal {
 			return false;
 		}else if(el.getBukkitEntity() instanceof Player && b instanceof PetEntity && ((PetEntity)b).getOwnerName().equals(((Player)el.getBukkitEntity()).getName())) {
 			return false;
+		}else if(b instanceof PetEntity && ((PetEntity)b).isSitting()) {
+			return false;
 		}else if(this.g != null && !this.g.isAssignableFrom(el.getClass())) {
 			return true;
 		}else{

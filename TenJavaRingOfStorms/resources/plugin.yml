@@ -2,3 +2,5 @@ main: com.RingOfStorms.tenjava.EntityPets
 name: EntityPets
 version: 1.0
 author: RingOfStorms
+commands:
+  pet:

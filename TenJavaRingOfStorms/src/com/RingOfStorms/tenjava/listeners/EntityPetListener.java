@@ -3,7 +3,6 @@ package com.RingOfStorms.tenjava.listeners;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_6_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -24,7 +23,6 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import com.RingOfStorms.tenjava.EntityPets;
 import com.RingOfStorms.tenjava.entities.PetEntity;
-import com.RingOfStorms.tenjava.entities.PetZombie;
 import com.RingOfStorms.tenjava.utils.CustomMobUtil;
 import com.RingOfStorms.tenjava.utils.ItemStackUtil;
 
@@ -89,10 +87,11 @@ public class EntityPetListener implements Listener {
 				if(eType != null) {
 					Location t = pro.getLocation().add(0, 0.1, 0);
 					pro.remove();
-					PetZombie z = new PetZombie(((CraftWorld)t.getWorld()).getHandle(), getPlugin(), p.getName());
-					CustomMobUtil.spawnCustomMob(t, z);
-					z.setNameTag(ChatColor.GREEN+p.getName()+"'s Pet Zombie");
-					z.setOwner(p);
+					PetEntity petEntity = getPlugin().generatePet(eType, p);
+//					PetZombie z = new PetZombie(((CraftWorld)t.getWorld()).getHandle(), getPlugin(), p.getName());
+					CustomMobUtil.spawnCustomMob(t, petEntity.getThis());
+					petEntity.setNameTag(ChatColor.GREEN+p.getName()+"'s Pet Zombie");
+					petEntity.setOwner(p);
 				}
 			}
 		}
@@ -136,9 +135,4 @@ public class EntityPetListener implements Listener {
 			e.setCancelled(true);
 		}
 	}
-	
-//	@EventHandler
-//	public void cancel (EntityTargetLivingEntityEvent e) {
-//		//TODO make pets smarter
-//	}
 }

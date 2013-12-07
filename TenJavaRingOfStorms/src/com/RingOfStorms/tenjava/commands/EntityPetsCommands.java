@@ -34,7 +34,7 @@ public class EntityPetsCommands implements CommandExecutor {
 			if(args.length == 0) {
 				if(p != null) {
 					Location t = p.getTargetBlock(null, 120).getLocation().add(0.5, 1.1, 0.5);
-					PetZombie z = new PetZombie(((CraftWorld)t.getWorld()).getHandle(), getPlugin());
+					PetZombie z = new PetZombie(((CraftWorld)t.getWorld()).getHandle(), getPlugin(), p.getName());
 					CustomMobUtil.spawnCustomMob(t, z);
 					z.setNameTag(ChatColor.GREEN+p.getName()+"'s Pet Zombie");
 					z.setOwner(p);

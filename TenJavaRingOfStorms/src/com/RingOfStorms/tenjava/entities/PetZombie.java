@@ -16,10 +16,15 @@ import com.RingOfStorms.tenjava.utils.CustomMobUtil;
 public class PetZombie extends EntityZombie implements PetEntity {
 
 	private final EntityPets plugin;
-	
+
 	public PetZombie(World arg0, EntityPets plugin) {
+		this(arg0, plugin, null);
+	}
+	public PetZombie(World arg0, EntityPets plugin, String owner) {
 		super(arg0);
 		this.plugin = plugin;
+		if(owner != null)
+			setOwner(owner);
 		CustomMobUtil.defaultPet(this);
 	}		
 	
@@ -77,9 +82,11 @@ public class PetZombie extends EntityZombie implements PetEntity {
 	
 	public void updateFollowGoal () {
 		Player p = Bukkit.getPlayerExact(ownerName);
-		if(p != null)
-			follow.setOwner(((CraftPlayer)p).getHandle());
-		follow.setSitting(isSitting());
+		if(follow != null) {
+			if(p != null)
+				follow.setOwner(((CraftPlayer)p).getHandle());
+			follow.setSitting(isSitting());
+		}
 	}
 	
 	public void updateAttribs () {

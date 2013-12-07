@@ -6,28 +6,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.server.v1_6_R3.EntityCreature;
 import net.minecraft.server.v1_6_R3.EntityHuman;
 import net.minecraft.server.v1_6_R3.EntityInsentient;
+import net.minecraft.server.v1_6_R3.EntityLiving;
 import net.minecraft.server.v1_6_R3.EntityTypes;
 import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import net.minecraft.server.v1_6_R3.PathfinderGoalFloat;
 import net.minecraft.server.v1_6_R3.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_6_R3.PathfinderGoalRandomLookaround;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 
 import com.RingOfStorms.tenjava.entities.PetEntity;
 import com.RingOfStorms.tenjava.pathfinders.PetGoalFollowOwner;
+import com.RingOfStorms.tenjava.pathfinders.PetMeleeAttack;
+import com.RingOfStorms.tenjava.pathfinders.PetOwnerHurtByTarget;
+import com.RingOfStorms.tenjava.pathfinders.PetOwnerHurtTarget;
 
 public class CustomMobUtil {
 	
 	public static void defaultPet (PetEntity entity) {
 		removeAllGoals(entity);
+		
 		entity.setFollow(new PetGoalFollowOwner(entity.getThis(), 1.2D, 10.0F, 2.0F, null));
 		addPathGoal(entity, 0, new PathfinderGoalFloat(entity.getThis()));
 		addPathGoal(entity, 1, entity.getFollow());
-		addPathGoal(entity, 2, new PathfinderGoalLookAtPlayer(entity.getThis(), EntityHuman.class, 10.0F));
-		addPathGoal(entity, 3, new PathfinderGoalRandomLookaround(entity.getThis()));
+		addPathGoal(entity, 2, new PetMeleeAttack(entity.getThis(), 1.3D, false));
+		addPathGoal(entity, 3, new PathfinderGoalLookAtPlayer(entity.getThis(), EntityHuman.class, 10.0F));
+		addPathGoal(entity, 4, new PathfinderGoalRandomLookaround(entity.getThis()));
+		
+		Player p = Bukkit.getPlayerExact(entity.getOwnerName());
+		if(p != null && entity.getThis() instanceof EntityCreature) {
+			EntityLiving elp = ((CraftPlayer)p).getHandle();
+			addTargetGoal(entity, 0, new PetOwnerHurtTarget((EntityCreature) entity.getThis(), elp));
+			addTargetGoal(entity, 1, new PetOwnerHurtByTarget((EntityCreature) entity.getThis(), elp));
+		}
 	}
 	
 	public static void addPathGoal (PetEntity entity, int priority, PathfinderGoal goal) {

@@ -7,7 +7,13 @@ import net.minecraft.server.v1_6_R3.World;
 
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Slime;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import com.RingOfStorms.tenjava.EntityPets;
 import com.RingOfStorms.tenjava.pathfinders.PetGoalFollowOwner;
@@ -35,6 +41,24 @@ public class PetCreeper extends EntityCreeper implements PetEntity {
 	
 	public EntityInsentient getThis() {
 		return this;
+	}
+	
+	@Override
+	public void l_ () {
+		super.l_();
+		Player p = Bukkit.getPlayerExact(ownerName);
+		if(p != null) {
+			if(p.getVehicle() != null && p.getVehicle().getEntityId() == id) {
+				if(p.isBlocking()) {
+					Vector dir = p.getEyeLocation().getDirection();
+					dir.normalize();
+					dir.setY(0);
+					dir.multiply(0.8D);
+					motX = dir.getX();
+					motZ = dir.getZ();
+				}
+			}
+		}
 	}
 	
 	private PetGoalFollowOwner follow;

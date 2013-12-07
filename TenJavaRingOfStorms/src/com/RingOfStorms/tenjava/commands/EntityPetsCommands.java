@@ -43,7 +43,7 @@ public class EntityPetsCommands implements CommandExecutor {
 			Player p = (Player) sender;
 			
 			if(args.length == 0) {
-				p.sendMessage(ChatColor.GREEN+"Available Pets: "+alloString);
+				p.sendMessage(ChatColor.GREEN+"Available Pets: "+ChatColor.DARK_AQUA+alloString);
 			}else if(args.length >= 1) {
 				EntityType et = null;
 				try {
@@ -62,7 +62,7 @@ public class EntityPetsCommands implements CommandExecutor {
 				if(petEntity != null) {
 					Location t = p.getTargetBlock(null, 120).getLocation().add(0.5, 1.1, 0.5);
 					CustomMobUtil.spawnCustomMob(t, petEntity.getThis());
-					petEntity.setNameTag(ChatColor.GREEN+p.getName()+"'s Pet "+getPlugin().entityName(et));
+					petEntity.setNameTag(ChatColor.GREEN+p.getName()+"'s "+getPlugin().entityName(et));
 					petEntity.setOwner(p);
 				}
 			}

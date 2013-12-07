@@ -30,7 +30,7 @@ Commands:
 <ul>
 <li> /pet : lists all entities that can be summoned.
 <li> /pet <entity> : spawns a pet of that entity.
-<li> /pet <entity> <player> : gives a player that pet item
+<li> /pet <entity> <player> [amount]: gives a player that pet item
 </ul>
 <br/>
 Download: https://github.com/tenjavacontest/RingOfStorms/raw/master/TenJavaRingOfStorms/dist/EntityPets.jar

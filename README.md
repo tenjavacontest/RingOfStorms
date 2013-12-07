@@ -1,33 +1,30 @@
 RingOfStorms
 ============
 
-Theme: REPLACE
+Theme: EntityPets
 <br/>Time: 1600 UTC
 <br/>Bukkit Version: craftbukkit-1.6.4-R2.0
 <br/>
-<br/>
-Description: Fun :)
-<br/>
+
+REPLACE
+=======
+Description: Have awesome pets, more info soon xD
 <br/>
 Features: 
 <ul>
-<li> test
+<li> Have a pet
 </ul>
-<br/>
 <br/>
 Permissions: 
 <ul>
-<li> test
+<li> entitypets.<entity>
 </ul>
-<br/>
 <br/>
 Commands: 
 <ul>
-<li> test
+<li> /pet
 </ul>
 <br/>
-<br/>
 Download: 
-<br/>
 <br/>
 Bugs: N/A

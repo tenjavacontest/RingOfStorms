@@ -1,4 +1,4 @@
-main: com.RingOfStorms.tenjava.REPLACE
-name: REPLACE
+main: com.RingOfStorms.tenjava.EntityPets
+name: EntityPets
 version: 1.0
 author: RingOfStorms

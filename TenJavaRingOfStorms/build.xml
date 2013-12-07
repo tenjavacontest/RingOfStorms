@@ -1,4 +1,4 @@
-<project name="REPLACE" default="package">
+<project name="EntityPets" default="package">
 	<property name="explorer" location="C:\Windows\explorer.exe"/>
 	<property name="distFolder" location="D:\Workspace\#GIT\tenjavaringofstorms\TenJavaRingOfStorms\dist"/>
 	<property environment="env"/>

@@ -7,12 +7,7 @@ import net.minecraft.server.v1_6_R3.World;
 
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Slime;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import com.RingOfStorms.tenjava.EntityPets;
@@ -43,20 +38,45 @@ public class PetSkeleton extends EntitySkeleton implements PetEntity {
 		return this;
 	}
 	
+	public void driveInput (boolean jump, boolean shift, double forward, double sideways) {
+		f = forward;
+		s = sideways;
+		j = jump;
+	}
+	
+	private double f = 0;
+	private double s = 0;
+	private boolean j = false;
+	private boolean cj = true;
+	
 	@Override
 	public void l_ () {
 		super.l_();
-		Player p = Bukkit.getPlayerExact(ownerName);
-		if(p != null) {
-			if(p.getVehicle() != null && p.getVehicle().getEntityId() == id) {
-				if(p.isBlocking()) {
-					Vector dir = p.getEyeLocation().getDirection();
-					dir.normalize();
-					dir.setY(0);
-					dir.multiply(0.8D);
-					motX = dir.getX();
-					motZ = dir.getZ();
+		if(this.onGround)
+			cj = true;
+		if(this.passenger != null) {
+			Player p = Bukkit.getPlayerExact(ownerName);
+			if(p != null) {
+				this.yaw = this.passenger.yaw;
+				double speed = 0.6;
+				Vector v = this.passenger.getBukkitEntity().getLocation().getDirection().setY(0).normalize();
+				Vector vs = this.passenger.getBukkitEntity().getLocation().getDirection().setY(0).normalize().crossProduct(new Vector(0, 1, 0));
+				if(f < 0)
+					v.multiply(-1);
+				else if(f == 0)
+					v.multiply(0);
+				
+				if(s > 0)
+					v.add(vs.multiply(-1));
+				else if(s < 0)
+					v.add(vs);
+				
+				if(j && cj) {
+					v.setY(2);
+					cj = false;
 				}
+				v.multiply(speed);
+				this.move(v.getX(), v.getY(), v.getZ());
 			}
 		}
 	}

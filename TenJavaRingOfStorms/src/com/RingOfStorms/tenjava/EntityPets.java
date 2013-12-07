@@ -24,6 +24,7 @@ import com.RingOfStorms.tenjava.entities.PetWitch;
 import com.RingOfStorms.tenjava.entities.PetWolf;
 import com.RingOfStorms.tenjava.entities.PetZombie;
 import com.RingOfStorms.tenjava.listeners.EntityPetListener;
+import com.RingOfStorms.tenjava.packets.PlayerDriver;
 
 public class EntityPets extends JavaPlugin {
 	
@@ -42,6 +43,9 @@ public class EntityPets extends JavaPlugin {
 		commands = new EntityPetsCommands(this, "pet");
 		
 		getServer().getPluginManager().registerEvents(new EntityPetListener(this), this);
+		
+		for(Player p : getServer().getOnlinePlayers())
+			PlayerDriver.track(p);
 		
 		return;
 	}

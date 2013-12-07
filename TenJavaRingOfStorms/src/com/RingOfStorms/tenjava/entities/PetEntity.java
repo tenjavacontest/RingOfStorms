@@ -39,4 +39,6 @@ public interface PetEntity {
 	public PetGoalFollowOwner getFollow ();
 	
 	public void setFollow (PetGoalFollowOwner follow);
+	
+	public void driveInput (boolean jump, boolean shift, double forward, double sideways);
 }

@@ -18,11 +18,13 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import com.RingOfStorms.tenjava.EntityPets;
 import com.RingOfStorms.tenjava.entities.PetEntity;
+import com.RingOfStorms.tenjava.packets.PlayerDriver;
 import com.RingOfStorms.tenjava.utils.CustomMobUtil;
 import com.RingOfStorms.tenjava.utils.ItemStackUtil;
 
@@ -134,5 +136,10 @@ public class EntityPetListener implements Listener {
 		if(e.getEntity().hasMetadata("petEntity0")) {
 			e.setCancelled(true);
 		}
+	}
+	
+	@EventHandler
+	public void register (PlayerJoinEvent e) {
+		PlayerDriver.track(e.getPlayer());
 	}
 }

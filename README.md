@@ -6,8 +6,8 @@ Theme: EntityPets
 <br/>Bukkit Version: craftbukkit-1.6.4-R2.0
 <br/>
 
-REPLACE
-=======
+EntityPets
+==========
 Description: Have awesome pets, more info soon xD
 <br/>
 Features: 

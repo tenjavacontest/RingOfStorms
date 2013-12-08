@@ -1,6 +1,5 @@
 package com.RingOfStorms.tenjava.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -47,8 +46,26 @@ public class EntityPetListener implements Listener {
 		if(e.getDamager() instanceof Player) {
 			Player p = (Player) e.getDamager();
 			if(e.getEntity().hasMetadata("petEntity0"))
-				if(e.getEntity().getMetadata("petEntity0").get(0).asString().equals(p.getName()))
+				if(e.getEntity().getMetadata("petEntity0").get(0).asString().equals(p.getName())) {
 					e.setCancelled(true);
+					return;
+				}
+		}
+		if(e.getEntity() instanceof LivingEntity && e.getDamager() instanceof LivingEntity) {
+			LivingEntity le0 = (LivingEntity) e.getEntity();
+			LivingEntity le1 = (LivingEntity) e.getDamager();
+			if(le0.getCustomName().equals(le1.getCustomName())) {
+				e.setCancelled(true);
+				return;
+			}
+		}
+		if(e.getDamager() instanceof Projectile && e.getEntity() instanceof LivingEntity && ((Projectile)e.getDamager()).getShooter() instanceof LivingEntity) {
+			LivingEntity le0 = (LivingEntity) e.getEntity();
+			LivingEntity le1 = (LivingEntity) ((Projectile)e.getDamager()).getShooter();
+			if(le0.getCustomName().equals(le1.getCustomName())) {
+				e.setCancelled(true);
+				return;
+			}
 		}
 	}
 	

@@ -11,8 +11,11 @@ import net.minecraft.server.v1_6_R3.EntityHuman;
 import net.minecraft.server.v1_6_R3.EntityInsentient;
 import net.minecraft.server.v1_6_R3.EntityLiving;
 import net.minecraft.server.v1_6_R3.EntityTypes;
+import net.minecraft.server.v1_6_R3.IRangedEntity;
 import net.minecraft.server.v1_6_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_6_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_6_R3.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_6_R3.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_6_R3.PathfinderGoalRandomLookaround;
 
@@ -36,7 +39,10 @@ public class CustomMobUtil {
 		
 		entity.setFollow(new PetGoalFollowOwner(entity.getThis(), 1.5D, 10.0F, 2.0F, null));
 		addPathGoal(entity, 0, new PathfinderGoalFloat(entity.getThis()));
-		addPathGoal(entity, 1, new PetMeleeAttack(entity.getThis(), 1.8D, false));
+		if(entity.getThis() instanceof IRangedEntity)
+			addPathGoal(entity, 1, new PathfinderGoalArrowAttack((IRangedEntity) entity.getThis(), 1.25D, 20, 10.0F));
+		else
+			addPathGoal(entity, 1, new PetMeleeAttack(entity.getThis(), 1.8D, false));
 		addPathGoal(entity, 2, entity.getFollow());
 		addPathGoal(entity, 3, new PathfinderGoalLookAtPlayer(entity.getThis(), EntityHuman.class, 10.0F));
 		addPathGoal(entity, 4, new PathfinderGoalRandomLookaround(entity.getThis()));
@@ -46,6 +52,7 @@ public class CustomMobUtil {
 			EntityLiving elp = ((CraftPlayer)p).getHandle();
 			addTargetGoal(entity, 0, new PetOwnerHurtTarget((EntityCreature) entity.getThis(), elp));
 			addTargetGoal(entity, 1, new PetOwnerHurtByTarget((EntityCreature) entity.getThis(), elp));
+			addTargetGoal(entity, 2, new PathfinderGoalHurtByTarget((EntityCreature) entity.getThis(), true));
 		}
 		
 		CraftEntity ce = entity.getThis().getBukkitEntity();

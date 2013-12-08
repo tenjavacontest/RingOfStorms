@@ -1,5 +1,6 @@
 package com.RingOfStorms.tenjava.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -108,14 +109,21 @@ public class EntityPetListener implements Listener {
 			ItemStack i = p.getItemInHand();
 			if(i != null && i.getItemMeta() != null && i.getItemMeta().getDisplayName() != null) {
 				String[] args = i.getItemMeta().getDisplayName().split(" ");
-				if(args.length == 3) {
-					EntityType eType = getPlugin().reverseName(args[2]);
+				if(args.length >= 3) {
+					EntityType eType = getPlugin().reverseName(comb(2, args));
 					if(eType != null) {
 						e.getEntity().setMetadata(args[0]+"_Pet", new FixedMetadataValue(getPlugin(), eType.toString()));
 					}
 				}
 			}
 		}
+	}
+	
+	private String comb (int o, String[] args) {
+		String ret = "";
+		for(int i=o; i<args.length; i++)
+			ret += args[i] + " ";
+		return ret.substring(0, ret.length()-1);
 	}
 	
 	@EventHandler

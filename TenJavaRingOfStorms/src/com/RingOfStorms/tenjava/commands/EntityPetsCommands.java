@@ -104,7 +104,7 @@ public class EntityPetsCommands implements CommandExecutor {
 					if(t != null) {
 						p.sendMessage(ChatColor.GREEN+"Giving "+t.getName()+" a "+getPlugin().entityName(et)+" pet.");
 						t.sendMessage(ChatColor.GREEN+"You have been given a "+getPlugin().entityName(et)+" pet.");
-						t.getInventory().addItem(ItemStackUtil.setName(new ItemStack(Material.SNOW_BALL, n), p.getName()+"'s Pet "+getPlugin().entityName(et)));
+						t.getInventory().addItem(ItemStackUtil.setName(new ItemStack(Material.SNOW_BALL, n), t.getName()+"'s Pet "+getPlugin().entityName(et)));
 					}else{
 						p.sendMessage(ChatColor.RED+"Invalid player");
 					}

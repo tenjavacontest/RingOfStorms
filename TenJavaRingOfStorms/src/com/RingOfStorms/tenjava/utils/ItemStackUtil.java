@@ -7,7 +7,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemStackUtil {
-
+	
+	/**
+	 * Sets ItemStack name
+	 * @param itemStack
+	 * @param name
+	 * @return
+	 */
 	public static ItemStack setName (ItemStack itemStack, String name) {
 		if(itemStack == null || name.isEmpty())
 			return null;
@@ -18,6 +24,12 @@ public class ItemStackUtil {
 		return ret;
 	}
 	
+	/**
+	 * Checks if two ItemStacks match based on their disp name
+	 * @param item
+	 * @param item2
+	 * @return
+	 */
 	public static boolean itemStacksMatch (ItemStack item, ItemStack item2) {
 		if(item == null && item2 == null)
 			return true;
@@ -44,6 +56,11 @@ public class ItemStackUtil {
 		return false;
 	}
 	
+	/**
+	 * Properly removes an ItemStack from a player
+	 * @param player
+	 * @param itemToRemove
+	 */
 	public static void removeItems (Player player, ItemStack itemToRemove) {
 		int amount = itemToRemove.getAmount();
 		ItemStack[] items = player.getInventory().getContents();
@@ -67,6 +84,12 @@ public class ItemStackUtil {
 		player.updateInventory();
 	}
 	
+	/**
+	 * Properly removes an ItemStack from a player
+	 * @param player
+	 * @param material
+	 * @param amount
+	 */
 	public static void removeItems (Player player, Material material, int amount) {
 		ItemStack[] items = player.getInventory().getContents();
 		for(int i=0; i<items.length; i++) {
@@ -89,6 +112,12 @@ public class ItemStackUtil {
 		player.updateInventory();
 	}
 	
+	/**
+	 * Properly removes an ItemStack from a player
+	 * @param player
+	 * @param id
+	 * @param amount
+	 */
 	public static void removeItems (Player player, int id, int amount) {
 		ItemStack[] items = player.getInventory().getContents();
 		for(int i=0; i<items.length; i++) {

@@ -18,6 +18,10 @@ public class PlayerDriver extends PlayerConnection {
 		super(((CraftServer)Bukkit.getServer()).getHandle().getServer(), entityplayer.playerConnection.networkManager, entityplayer);
 	}
 	
+	/**
+	 * Replace PlayerConnection with PlayerDriver
+	 * @param player
+	 */
 	public static void track (Player player) {
 		EntityPlayer ep = ((CraftPlayer)player).getHandle();
 		if(!(ep.playerConnection instanceof PlayerDriver)) {
@@ -25,6 +29,10 @@ public class PlayerDriver extends PlayerConnection {
 		}
 	}
 	
+	/**
+	 * Replaces PlayerDriver with PlayerConnection
+	 * @param player
+	 */
 	public static void untrack (Player player) {
 		EntityPlayer ep = ((CraftPlayer)player).getHandle();
 		if(ep.playerConnection instanceof PlayerDriver) {
@@ -32,6 +40,9 @@ public class PlayerDriver extends PlayerConnection {
 		}
 	}
 	
+	/**
+	 * Listeners for packet 27 player input for pet movement
+	 */
 	@Override
 	public void a (Packet27PlayerInput packet) {
 		super.a(packet);

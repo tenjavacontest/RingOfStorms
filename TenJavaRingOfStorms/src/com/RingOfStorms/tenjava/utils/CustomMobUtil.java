@@ -34,6 +34,10 @@ import com.RingOfStorms.tenjava.pathfinders.PetOwnerHurtTarget;
 
 public class CustomMobUtil {
 	
+	/**
+	 * Assigns default parameters to the pet entity
+	 * @param entity
+	 */
 	public static void defaultPet (PetEntity entity) {
 		removeAllGoals(entity);
 		
@@ -59,14 +63,30 @@ public class CustomMobUtil {
 		ce.setMetadata("petEntity0", new FixedMetadataValue(entity.getPlugin(), entity.getOwnerName()));
 	}
 	
+	/**
+	 * Adds path goal to pet
+	 * @param entity
+	 * @param priority
+	 * @param goal
+	 */
 	public static void addPathGoal (PetEntity entity, int priority, PathfinderGoal goal) {
 		entity.getGoalSelector().a(priority, goal);
 	}
 	
+	/**
+	 * Adds target goal to pet
+	 * @param entity
+	 * @param priority
+	 * @param goal
+	 */
 	public static void addTargetGoal (PetEntity entity, int priority, PathfinderGoal goal) {
 		entity.getTargetSelector().a(priority, goal);
 	}
 	
+	/**
+	 * Clears all current goals
+	 * @param entity
+	 */
 	public static void removeAllGoals (PetEntity entity) {
 		try {
 			Field lists = entity.getGoalSelector().getClass().getDeclaredField("a");
@@ -93,6 +113,11 @@ public class CustomMobUtil {
 		}
 	}
 	
+	/**
+	 * Spawns a custom mob w/o ruining server
+	 * @param loc
+	 * @param mob
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void spawnCustomMob (Location loc, EntityInsentient mob) {
 		try {

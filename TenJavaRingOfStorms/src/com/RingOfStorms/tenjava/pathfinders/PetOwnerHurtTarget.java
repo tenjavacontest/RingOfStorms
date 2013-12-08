@@ -4,6 +4,11 @@ import net.minecraft.server.v1_6_R3.EntityCreature;
 import net.minecraft.server.v1_6_R3.EntityLiving;
 import net.minecraft.server.v1_6_R3.PathfinderGoalTarget;
 
+/**
+ * Custom owner hurt targeting for pets
+ * @author RingOfStorms
+ *
+ */
 public class PetOwnerHurtTarget extends PathfinderGoalTarget {
 	
 	EntityLiving a;

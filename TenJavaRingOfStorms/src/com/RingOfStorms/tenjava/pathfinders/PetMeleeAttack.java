@@ -11,6 +11,11 @@ import org.bukkit.entity.Player;
 
 import com.RingOfStorms.tenjava.entities.PetEntity;
 
+/**
+ * Custom melee attack bult for pets
+ * @author RingOfStorms
+ *
+ */
 public class PetMeleeAttack extends PathfinderGoal {
 	
 	World a;

@@ -41,6 +41,10 @@ public class EntityPetListener implements Listener {
 		return plugin;
 	}
 	
+	/**
+	 * Cance's friendly damage
+	 * @param e
+	 */
 	@EventHandler
 	public void damage (EntityDamageByEntityEvent e) {
 		if(e.getDamager() instanceof Player) {
@@ -54,9 +58,14 @@ public class EntityPetListener implements Listener {
 		if(e.getEntity() instanceof LivingEntity && e.getDamager() instanceof LivingEntity) {
 			LivingEntity le0 = (LivingEntity) e.getEntity();
 			LivingEntity le1 = (LivingEntity) e.getDamager();
-			if(le0.getCustomName().equals(le1.getCustomName())) {
-				e.setCancelled(true);
-				return;
+			if(le0.getCustomName() != null && le1.getCustomName() != null) {
+				if(le0.getCustomName().equals(le1.getCustomName())) {
+					e.setCancelled(true);
+					return;
+				}else if(le0.getCustomName().split(" ")[0].equals(le1.getCustomName().split(" ")[0])) {
+					e.setCancelled(true);
+					return;
+				}
 			}
 		}
 		if(e.getDamager() instanceof Projectile && e.getEntity() instanceof LivingEntity && ((Projectile)e.getDamager()).getShooter() instanceof LivingEntity) {
@@ -69,6 +78,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Handles right clicks with pets for sitting, riding, and returning
+	 * @param e
+	 */
 	@EventHandler
 	public void sit (PlayerInteractEntityEvent e) {
 		Player p = e.getPlayer();
@@ -98,6 +111,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Spawns a pet when pet ball lands
+	 * @param e
+	 */
 	@EventHandler
 	public void eggHit (ProjectileHitEvent e) {
 		Projectile pro = e.getEntity();
@@ -109,7 +126,6 @@ public class EntityPetListener implements Listener {
 					Location t = pro.getLocation().add(0, 0.1, 0);
 					pro.remove();
 					PetEntity petEntity = getPlugin().generatePet(eType, p);
-//					PetZombie z = new PetZombie(((CraftWorld)t.getWorld()).getHandle(), getPlugin(), p.getName());
 					CustomMobUtil.spawnCustomMob(t, petEntity.getThis());
 					petEntity.setNameTag(ChatColor.GREEN+p.getName()+"'s Pet Zombie");
 					petEntity.setOwner(p);
@@ -118,6 +134,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Tags launched pet ball for when it lands
+	 * @param e
+	 */
 	@EventHandler
 	public void throwEgg (ProjectileLaunchEvent e) {
 		LivingEntity le = e.getEntity().getShooter();
@@ -136,6 +156,12 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Combines a part of a String array from an offset
+	 * @param o
+	 * @param args
+	 * @return
+	 */
 	private String comb (int o, String[] args) {
 		String ret = "";
 		for(int i=o; i<args.length; i++)
@@ -143,6 +169,10 @@ public class EntityPetListener implements Listener {
 		return ret.substring(0, ret.length()-1);
 	}
 	
+	/**
+	 * Cancel some problematic events
+	 * @param e
+	 */
 	@EventHandler
 	public void cancel (EntityExplodeEvent e) {
 		if(e.getEntity().hasMetadata("petEntity0")) {
@@ -150,6 +180,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Cancel some problematic events
+	 * @param e
+	 */
 	@EventHandler
 	public void cancel (EntityChangeBlockEvent e) {
 		if(e.getEntity().hasMetadata("petEntity0")) {
@@ -157,6 +191,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Cancel some problematic events
+	 * @param e
+	 */
 	@EventHandler
 	public void cancel (EntityCombustByBlockEvent e) {
 		if(e.getEntity().hasMetadata("petEntity0")) {
@@ -164,6 +202,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Cancel some problematic events
+	 * @param e
+	 */
 	@EventHandler
 	public void cancel (EntityCombustEvent e) {
 		if(e.getEntity().hasMetadata("petEntity0")) {
@@ -171,6 +213,10 @@ public class EntityPetListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Registers player to PlayerDriver when they join
+	 * @param e
+	 */
 	@EventHandler
 	public void register (PlayerJoinEvent e) {
 		PlayerDriver.track(e.getPlayer());

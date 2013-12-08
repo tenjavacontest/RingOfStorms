@@ -32,9 +32,15 @@ public class EntityPetsCommands implements CommandExecutor {
 		return plugin;
 	}
 	
+	/**
+	 * List of allowed entities for the pet command
+	 */
 	private List<EntityType> allow = new ArrayList<EntityType>();
 	private String alloString = "";
 	
+	/**
+	 * Handles commands for the plugin
+	 */
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -114,6 +120,9 @@ public class EntityPetsCommands implements CommandExecutor {
 		return false;
 	}
 	
+	/**
+	 * Populates list and allow string if needed
+	 */
 	private void populateAllow () {
 		if(allow.isEmpty()) {
 			allow.add(EntityType.CHICKEN);

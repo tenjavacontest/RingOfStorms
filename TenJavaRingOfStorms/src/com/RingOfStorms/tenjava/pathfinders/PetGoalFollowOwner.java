@@ -7,6 +7,11 @@ import net.minecraft.server.v1_6_R3.Navigation;
 import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import net.minecraft.server.v1_6_R3.World;
 
+/**
+ * Custom follow ower goal for pets
+ * @author RingOfStorms
+ *
+ */
 public class PetGoalFollowOwner extends PathfinderGoal {
 	
 	private EntityInsentient d;

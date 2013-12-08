@@ -28,16 +28,24 @@ import com.RingOfStorms.tenjava.packets.PlayerDriver;
 
 public class EntityPets extends JavaPlugin {
 	
+	/**
+	 * Used to carry out commands in the plugin
+	 */
 	private EntityPetsCommands commands;
-	
 	public EntityPetsCommands getCommands ()	{return commands;	}
 	
+	/**
+	 * Gets called when the plugin disables, cancels any tasks if there are any
+	 */
 	@Override
 	public void onDisable () {
 		getServer().getScheduler().cancelTasks(this);
 		return;
 	}
 	
+	/**
+	 * Gets called when plugin gets enabled, initializes command executor and tracks players for the PlayerDriver
+	 */
 	@Override
 	public void onEnable () {
 		commands = new EntityPetsCommands(this, "pet");
@@ -50,10 +58,20 @@ public class EntityPets extends JavaPlugin {
 		return;
 	}
 	
+	/**
+	 * Converts EntityType to a readable string
+	 * @param t
+	 * @return
+	 */
 	public String entityName (EntityType t) {
 		return (t.toString().toUpperCase().charAt(0)+t.toString().toLowerCase().substring(1)).replace("_", " ");
 	}
 	
+	/**
+	 * Reverses the entityName (EntityType t) function back to an EntityType
+	 * @param name
+	 * @return
+	 */
 	public EntityType reverseName (String name) {
 		try {
 			return EntityType.valueOf(name.toUpperCase().replace(" ", "_"));
@@ -62,6 +80,12 @@ public class EntityPets extends JavaPlugin {
 		}
 	}
 	
+	/**
+	 * Creates a PetEntity based on a player and EntityType input
+	 * @param et
+	 * @param p
+	 * @return
+	 */
 	public PetEntity generatePet (EntityType et, Player p) {
 		PetEntity petEntity = null;
 		
